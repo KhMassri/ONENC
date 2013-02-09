@@ -1,0 +1,47 @@
+
+Group1.groupID = Src
+Group1.movementModel = StationaryMovement 
+Group1.mode = 1
+Group1.lowLeft = 700,100
+Group1.topRight = 800, 200
+Group1.nrofHosts = [1]
+Group1.bufferSize = 100M
+Group1.msgTtl = 12000
+
+
+Group2.groupID = Dummy
+Group2.movementModel = StationaryMovement 
+Group2.mode = 1
+Group2.lowLeft = 500,100
+Group2.topRight = 600, 200
+Group2.nrofHosts = [20]
+
+
+Group3.groupID = Dst
+Group3.movementModel = StationaryMovement 
+Group3.mode = 0
+Group3.direction = 90
+Group3.offset = 10
+Group3.nodeLocation = 850,250
+Group3.nrofHosts = [1]
+Group3.bufferSize = 1000M
+Group3.msgTtl = 12000
+
+
+Group4.groupID = Relay
+Group4.movementModel = StationaryMovement 
+Group4.mode = 1
+Group4.lowLeft = 10,10
+Group4.topRight = 400, 400
+Group4.msgTtl = 1200
+Group4.nrofHosts = [77]
+Group4.bufferSize = [32k]
+
+
+
+
+Events.nrof = 2
+Events2.class = StandardEventsReader
+Events2.filePath = data/connections/infocomS16_13_2.txt
+
+

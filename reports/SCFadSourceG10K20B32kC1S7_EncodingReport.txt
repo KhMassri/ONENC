@@ -1,0 +1,4 @@
+Time: 17051
+Encounters_at_dec: 67
+Total_Encounters: 1044
+Active_Encounters: 8

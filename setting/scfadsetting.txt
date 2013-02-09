@@ -1,0 +1,75 @@
+Scenario.name = %%Group.DecisionEngine%%G%%SCFad.nrofGenerations%%K%%SCFad.nrofInjections%%B%%Group3.bufferSize%%C%%SCFad.codding%%S%%MovementModel.rngSeed
+Scenario.endTime = 341042.00
+Scenario.updateInterval = 1
+Scenario.simulateConnections = true
+
+Optimization.endOfEventProcessing = 341042.00
+
+Scenario.useRealNode = 0
+btInterface.transmitSpeed = 256k
+btInterface.transmitRange = 30
+
+
+Group.router = DecisionEngineRouter
+
+# the router is DecisionEngine but each decider is according to the specified in the Groupx.DecisionEngien
+DecisionEngineRouter.decisionEngine = [SCFadSource]
+Group.DecisionEngine = SCFadSource
+
+Scenario.nrofHostGroups = 3
+Group1.DecisionEngine = [SCFadSource]
+Group2.DecisionEngine = [SCFadDestination]
+Group3.DecisionEngine = [SCFadRelay]
+
+
+SCFad.nrofPods = 1
+SCFad.nrofGenerations = [10]
+SCFad.nrofInjections = [10]
+SCFad.codding = [0;1]
+SCFad.alpha = 0.2
+SCFad.gamma = 0.70
+SCFad.secondsForTimeOut = 1000
+
+
+MovementModel.rngSeed = [0;0;1;1;2;2;3;3;4;4;5;5;6;6;7;7;8;8;9;9;10;1;1;1;1;1;1;1;2;2;2;2;2;2;2;2;2;3;3;3;3;3;3;3;3;3;4;4;4;4;4;4;4;4;4;5;5;5;5;5;5;5;5;5;6;6;6;6;6;6;6;6;6;7;7;7;7;7;7;7;7;7;8;8;8;8;8;8;8;8;8;9;9;9;9;9;9;9;9;9]
+
+
+Group1.groupID = Src
+Group1.movementModel = StationaryMovement 
+Group1.mode = 1
+Group1.lowLeft = 600,200
+Group1.topRight = 650,250
+Group1.nrofHosts = [1]
+Group1.bufferSize = 100M
+Group1.msgTtl = 12000
+
+
+Group2.groupID = Dst
+Group2.movementModel = StationaryMovement 
+Group2.mode = 0
+Group2.direction = 90
+Group2.offset = 10
+Group2.nodeLocation = 300,250
+Group2.nrofHosts = [1]
+Group2.bufferSize = 1000M
+Group2.msgTtl = 12000
+
+
+Group3.groupID = Relay
+Group3.movementModel = RandomWalk
+Group3.mode = 0
+Group3.lowLeft = 10,10
+Group3.topRight = 400, 400
+Group3.msgTtl = 1200
+Group3.nrofHosts = [77]
+Group3.bufferSize = [32k]
+
+
+
+Events1.hosts = [0,1]
+Events1.tohosts = [1,2]
+Events1.interval = 1,2
+Events1.size = 10k,11k
+
+Report.reportDir = reports/
+
