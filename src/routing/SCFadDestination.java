@@ -96,20 +96,31 @@ public class SCFadDestination implements RoutingDecisionEngine
 		String[] id = m.getId().split(":");
 		String lc = id[1];
 		int pod = Integer.parseInt(id[0].substring(1));
+		int curRank = decodingMatrices[pod].rank();
 		insertRowInto(pod,lc);
+				
 
 		if(decodingMatrices[pod].rank()>=G && !encodedPods.contains("P"+pod))
 		{
 			encodedPods.add("P"+pod);
 
-			for(NetworkInterface c: me.getInterfaces())
+			/*for(NetworkInterface c: me.getInterfaces())
 				for(ConnectionListener l:c.getClisteners())
 					if(l instanceof EncodingReport )
-						((EncodingReport)l).encodingDone(me, pod,this.nrofPodCarrier[pod]);
+						((EncodingReport)l).encodingDone(me, pod,this.nrofPodCarrier[pod]);*/
+			return true;
 
 		}
 
-		return true;
+		else if(decodingMatrices[pod].rank()>curRank && !encodedPods.contains("P"+pod))
+		{
+			
+			return true;
+		
+		}
+			
+		
+		return false;
 
 	}
 
@@ -131,7 +142,7 @@ public class SCFadDestination implements RoutingDecisionEngine
 
 	public boolean shouldSaveReceivedMessage(Message m, DTNHost thisHost)
 	{
-		return m.getTo() != thisHost;
+		return false;
 	}
 
 	public boolean shouldSendMessageToHost(Message m,DTNHost me, DTNHost otherHost)

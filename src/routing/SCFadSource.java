@@ -23,6 +23,7 @@ public class SCFadSource implements RoutingDecisionEngine
 	static private  int codding;
 	
 	static private String ftStr="FaultToleranceValue";
+	static private String repStr = "Replicas";
 	
 	
 	
@@ -54,7 +55,7 @@ public class SCFadSource implements RoutingDecisionEngine
 		this.g = 1;
 		this.pods=0;
 		this.AllLC=new HashSet<Integer>();
-		this.rng = new Random(1);
+		this.rng = new Random();
 		this.deleted = K-G;
 
 	}
@@ -101,6 +102,7 @@ public class SCFadSource implements RoutingDecisionEngine
 		m.setID("P"+pods+":"+this.getE());
 		pkt++;
 		m.addProperty("FaultToleranceValue", new Double(0));
+		m.addProperty(repStr, new Integer(0));
 		return true;
 	}
 
@@ -116,6 +118,8 @@ public class SCFadSource implements RoutingDecisionEngine
 			return true;
 		
 		deleted--;
+		m.updateProperty(repStr, (Integer)m.getProperty(repStr)+1);
+		
 		return false;
 	}
 
@@ -166,11 +170,14 @@ public class SCFadSource implements RoutingDecisionEngine
 
 
 	public boolean shouldSortOldestMessages(){
-		return true;
+		if(codding==1)
+			return false;
+		else
+			return true;
 	}
 
 	public int compareToSort(Message msg1, Message msg2){
-		if (rng.nextFloat()>0.5)
+		if ((Integer)msg1.getProperty(repStr) < (Integer)msg2.getProperty(repStr))
 			return -1;
 		else return 1;
 		

@@ -45,6 +45,8 @@ public class MessageStatsReport extends Report implements MessageListener {
 	private int nrofResponseReqCreated;
 	private int nrofResponseDelivered;
 	private int nrofDelivered;
+	private double fullDeliveryTime;
+	private double lastDeliveryTime;
 	
 	/**
 	 * Constructor.
@@ -75,6 +77,8 @@ public class MessageStatsReport extends Report implements MessageListener {
 		this.nrofResponseReqCreated = 0;
 		this.nrofResponseDelivered = 0;
 		this.nrofDelivered = 0;
+		this.fullDeliveryTime = 0;
+		this.lastDeliveryTime = 0;
 	}
 
 	
@@ -120,6 +124,13 @@ public class MessageStatsReport extends Report implements MessageListener {
 			this.latencies.add(getSimTime() - 
 				this.creationTimes.get(m.getId()) );
 			this.nrofDelivered++;
+			
+			if(nrofDelivered == this.nrofCreated)
+			{
+				this.fullDeliveryTime = getSimTime();
+			}
+			this.lastDeliveryTime=getSimTime();
+			
 			this.hopCounts.add(m.getHops().size() - 1);
 			this.delivered.add(m.getId());
 			if (m.isResponse()) {
@@ -196,6 +207,12 @@ public class MessageStatsReport extends Report implements MessageListener {
 			totalNrofTotalCopies+=e.getValue();
 				
 		avgNrofTotalCopies = totalNrofTotalCopies/totalCopies.size();
+		
+		if(fullDeliveryTime == 0)
+			fullDeliveryTime = this.getSimTime();
+		
+		
+			
 
 		String statsText = "created: " + this.nrofCreated + 
 			"\nstarted: " + this.nrofStarted + 
@@ -217,7 +234,9 @@ public class MessageStatsReport extends Report implements MessageListener {
 			"\nbuffertime_med: " + getMedian(this.msgBufferTime) +
 			"\ncustodiantime_avg: " + getAverage(this.msgCustodianTime) +
 			"\nrtt_avg: " + getAverage(this.rtt) +
-			"\nrtt_med: " + getMedian(this.rtt)
+			"\nrtt_med: " + getMedian(this.rtt) +
+			"\nfull_delivery_time: " + format(fullDeliveryTime)+
+			"\nlast_delivery_time: " + format(lastDeliveryTime)
 			;
 		
 		write(statsText);
