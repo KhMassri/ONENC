@@ -30,10 +30,10 @@ Group.waitTime = 0, 120
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
-# Walking speeds (2,8 - 7,2 Km/h)
-Group.speed = 0.8, 2.0
+# Walking speeds (2,8 - 7,2 Km/h +1)
+Group.speed = 1.8, 3.0
 # Message TTL of inf minutes
-Group.msgTtl = 3600
+Group.msgTtl = 360000
 Group.nrofHosts = 0
 
 # group1 Sinks nodes
@@ -77,7 +77,7 @@ Events1.tohosts = 0,100
 Events1.prefix = M
 
 
-MovementModel.worldSize = 1000, 500
+MovementModel.worldSize = 700, 500
 MovementModel.warmup = 0
 
 GridBasedMovement.nrofGridFiles = 1

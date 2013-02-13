@@ -23,15 +23,15 @@ Group3.DecisionEngine = [SCFadRelay]
 
 
 SCFad.nrofPods = 1
-SCFad.nrofGenerations = [10]
-SCFad.nrofInjections = [20]
+SCFad.nrofGenerations = [5]
+SCFad.nrofInjections = [10]
 SCFad.codding = [0;1]
 SCFad.alpha = 0.2
 SCFad.gamma = 0.70
 SCFad.secondsForTimeOut = 1000
 
 
-MovementModel.rngSeed = [0;0;1;1;2;2;3;3;4;4;5;5;6;6;7;7;8;8;9;9]
+MovementModel.rngSeed = [36;36;1;1;2;2;3;3;4;4;5;5;6;6;7;7;8;8;9;9]
 
 
 Group1.groupID = Src
@@ -61,7 +61,7 @@ Group3.mode = 0
 Group3.lowLeft = 10,10
 Group3.topRight = 400, 400
 Group3.msgTtl = 1200
-Group3.nrofHosts = [77]
+Group3.nrofHosts = [100]
 Group3.bufferSize = [32k]
 
 
@@ -71,5 +71,5 @@ Events1.tohosts = [1,2]
 Events1.interval = 1,2
 Events1.size = 10k,11k
 
-Report.reportDir = reports/10
+Report.reportDir = reports/test
 

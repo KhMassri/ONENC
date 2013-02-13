@@ -2,8 +2,6 @@ package routing;
 
 import java.util.*;
 
-import report.EncodingReport;
-
 import Jama.Matrix;
 
 import core.*;
@@ -22,6 +20,7 @@ public class SCFadDestination implements RoutingDecisionEngine
 
 	Matrix[] decodingMatrices;
 	Set<String> encodedPods;
+	Set<String> badLc;
 	int[] rows;
 	int[] nrofPodCarrier;
 
@@ -42,8 +41,9 @@ public class SCFadDestination implements RoutingDecisionEngine
 		rows = new int[P];
 		nrofPodCarrier = new int[P];
 		encodedPods = new HashSet<String>();
+		badLc = new HashSet<String>();
 		for(int i=0;i<decodingMatrices.length;i++)
-			decodingMatrices[i]=new Matrix(3*K,G);
+			decodingMatrices[i]=new Matrix(5*K,G);
 
 
 	}
@@ -96,30 +96,26 @@ public class SCFadDestination implements RoutingDecisionEngine
 		String[] id = m.getId().split(":");
 		String lc = id[1];
 		int pod = Integer.parseInt(id[0].substring(1));
+		
+		
+		if(badLc.contains(lc))
+			return false;
+		
 		int curRank = decodingMatrices[pod].rank();
-		insertRowInto(pod,lc);
-				
+		insertRowInto(pod,lc);		
 
 		if(decodingMatrices[pod].rank()>=G && !encodedPods.contains("P"+pod))
 		{
 			encodedPods.add("P"+pod);
-
-			/*for(NetworkInterface c: me.getInterfaces())
-				for(ConnectionListener l:c.getClisteners())
-					if(l instanceof EncodingReport )
-						((EncodingReport)l).encodingDone(me, pod,this.nrofPodCarrier[pod]);*/
 			return true;
-
 		}
 
 		else if(decodingMatrices[pod].rank()>curRank && !encodedPods.contains("P"+pod))
-		{
-			
 			return true;
-		
-		}
 			
 		
+		
+		badLc.add(lc);
 		return false;
 
 	}

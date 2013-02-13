@@ -25,7 +25,7 @@ public class RandomWalk extends MovementModel implements SwitchableMovement {
 	public RandomWalk(Settings settings) {
 		super(settings);
 		minDistance = 0;
-		maxDistance = 50;
+		maxDistance = 100;
 	}
 	
 	private RandomWalk(RandomWalk rwp) {
