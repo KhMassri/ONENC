@@ -444,11 +444,13 @@ public class DecisionEngineRouter extends ActiveRouter
 					
 					Message msg1 = t1.getKey();
 					Message msg2 = t2.getKey();
+					Connection con1 = t1.getValue();
+					Connection con2 = t2.getValue();
 					
-					if(decider.compareToSort(msg1,msg2) == 0)
+					if(decider.compareToSort(msg1,msg2, con1, con2, getHost()) == 0)
 						return compareByQueueMode(msg1, msg2);
 					
-					return decider.compareToSort(msg1,msg2);
+					return decider.compareToSort(msg1,msg2, con1, con2,getHost());
 					}		
 				} 
 			); 
@@ -526,10 +528,10 @@ public class DecisionEngineRouter extends ActiveRouter
 			Collections.sort(validMessages,new Comparator<Message>() {
 				public int compare(Message msg1, Message msg2) {
 					
-					if(decider.compareToSort(msg1,msg2) == 0)
+					if(decider.compareToSort(msg1,msg2, null, null,getHost()) == 0)
 						return compareByQueueMode(msg1, msg2);
 					
-					return decider.compareToSort(msg1,msg2);
+					return decider.compareToSort(msg1,msg2, null, null, getHost());
 					}		
 				} 
 			); 

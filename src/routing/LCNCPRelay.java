@@ -143,7 +143,7 @@ public class LCNCPRelay implements RoutingDecisionEngine
 		return true;
 	}
 
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 
 		return (Integer)msg2.getProperty("L") - (Integer)msg1.getProperty("L");
 

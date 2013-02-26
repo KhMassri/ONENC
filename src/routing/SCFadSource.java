@@ -176,7 +176,7 @@ public class SCFadSource implements RoutingDecisionEngine
 			return true;
 	}
 
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 		if ((Integer)msg1.getProperty(repStr) < (Integer)msg2.getProperty(repStr))
 			return -1;
 		else return 1;

@@ -130,8 +130,11 @@ public interface RoutingDecisionEngine
 	public boolean shouldSortOldestMessages();
 
 	/**
+	 * @param con1 check if null then its called to sort oldest msg
+	 * @param con2 check if null then its called to sort oldest msg
+	 * @param me this host
 	 * @return -1 if msg1 is newer than msg2 (comes first). 1 if msg2 comes first. 0 otherwise (compared according to default receive time)
 	 * 
 	 */
-	public int compareToSort(Message msg1, Message msg2);
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me);
 }

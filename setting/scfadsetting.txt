@@ -1,4 +1,4 @@
-Scenario.name = %%Group.DecisionEngine%%G%%SCFad.nrofGenerations%%K%%SCFad.nrofInjections%%B%%Group3.bufferSize%%C%%SCFad.codding%%S%%MovementModel.rngSeed
+Scenario.name = old%%Group.DecisionEngine%%G%%SCFad.nrofGenerations%%K%%SCFad.nrofInjections%%B%%Group3.bufferSize%%C%%SCFad.codding%%S%%MovementModel.rngSeed
 Scenario.endTime = 341042.00
 Scenario.updateInterval = 1
 Scenario.simulateConnections = true
@@ -23,16 +23,16 @@ Group3.DecisionEngine = [SCFadRelay]
 
 
 SCFad.nrofPods = 1
-SCFad.nrofGenerations = [5]
-SCFad.nrofInjections = [10]
-SCFad.codding = [0;1]
+SCFad.nrofGenerations = [15]
+SCFad.nrofInjections = [40]
+SCFad.codding = [1;1]
 SCFad.alpha = 0.2
 SCFad.gamma = 0.70
 SCFad.secondsForTimeOut = 1000
 
 
-MovementModel.rngSeed = [36;36;1;1;2;2;3;3;4;4;5;5;6;6;7;7;8;8;9;9]
-
+MovementModel.rngSeed = [1;2;3;4;5;6;4;4;5;5;6;6;7;7;8;8;9;9]
+MovementModel.worldSize = 1000, 500
 
 Group1.groupID = Src
 Group1.movementModel = StationaryMovement 
@@ -61,7 +61,7 @@ Group3.mode = 0
 Group3.lowLeft = 10,10
 Group3.topRight = 400, 400
 Group3.msgTtl = 1200
-Group3.nrofHosts = [100]
+Group3.nrofHosts = [77]
 Group3.bufferSize = [32k]
 
 

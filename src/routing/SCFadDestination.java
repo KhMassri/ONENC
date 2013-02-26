@@ -20,7 +20,6 @@ public class SCFadDestination implements RoutingDecisionEngine
 
 	Matrix[] decodingMatrices;
 	Set<String> encodedPods;
-	Set<String> badLc;
 	int[] rows;
 	int[] nrofPodCarrier;
 
@@ -41,7 +40,6 @@ public class SCFadDestination implements RoutingDecisionEngine
 		rows = new int[P];
 		nrofPodCarrier = new int[P];
 		encodedPods = new HashSet<String>();
-		badLc = new HashSet<String>();
 		for(int i=0;i<decodingMatrices.length;i++)
 			decodingMatrices[i]=new Matrix(5*K,G);
 
@@ -93,13 +91,11 @@ public class SCFadDestination implements RoutingDecisionEngine
 
 	public boolean isFinalDest(Message m, DTNHost from,DTNHost me)
 	{
+		/*Inform as delivered just if it increases the rank*/
 		String[] id = m.getId().split(":");
 		String lc = id[1];
 		int pod = Integer.parseInt(id[0].substring(1));
 		
-		
-		if(badLc.contains(lc))
-			return false;
 		
 		int curRank = decodingMatrices[pod].rank();
 		insertRowInto(pod,lc);		
@@ -110,12 +106,11 @@ public class SCFadDestination implements RoutingDecisionEngine
 			return true;
 		}
 
-		else if(decodingMatrices[pod].rank()>curRank && !encodedPods.contains("P"+pod))
+		else if(decodingMatrices[pod].rank()>curRank)
 			return true;
 			
-		
-		
-		badLc.add(lc);
+		/*put it in the delivered without telling the message listeners so that we have delivered = rank in the final report*/
+		me.getRouter().deliveredMessages.put(m.getId(), m);
 		return false;
 
 	}
@@ -153,7 +148,7 @@ public class SCFadDestination implements RoutingDecisionEngine
 		return false;
 	}
 
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 
 		return 0;
 
@@ -178,6 +173,7 @@ public class SCFadDestination implements RoutingDecisionEngine
 	public Set<String> getEncodedPods() {
 		return encodedPods;
 	}
+
 	
 
 }

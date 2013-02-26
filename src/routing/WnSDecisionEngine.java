@@ -114,7 +114,7 @@ public class WnSDecisionEngine implements RoutingDecisionEngine
 		return true;
 	}
 
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 		
 		/*
 		 * < 0 means msg1 is more important

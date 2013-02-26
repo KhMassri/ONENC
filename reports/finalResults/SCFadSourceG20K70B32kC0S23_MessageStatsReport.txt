@@ -1,0 +1,25 @@
+Message stats for scenario SCFadSourceG20K70B32kC0S23
+sim_time: 341042.0000
+created: 20
+started: 20541
+relayed: 20343
+aborted: 198
+dropped: 1052
+removed: 19001
+delivered: 13
+delivery_prob: 0.6500
+response_prob: 0.0000
+overhead_ratio: 1563.8462
+latency_avg: 4208.8462
+latency_med: 4387.0000
+hopcount_avg: 3.4615
+hopcount_med: 4
+copies_avg: 25.5
+total_copies_avg: 980.55
+buffertime_avg: 4641.2313
+buffertime_med: 123.0000
+custodiantime_avg: 4653530.6000
+rtt_avg: NaN
+rtt_med: NaN
+full_delivery_time: 341042.0000
+last_delivery_time: 6105.0000

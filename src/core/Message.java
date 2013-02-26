@@ -36,31 +36,31 @@ public class Message implements Comparable<Message> {
 	private int initTtl;
 	/**A label for the msg used in ScarRouter*/
 	private String label="master";
-	
+
 	private String state = "MAX";
-	
+
 	private double temp = 100;
-	
+
 	/** if a response to this message is required, this is the size of the 
 	 * response message (or 0 if no response is requested) */
 	private int responseSize;
 	/** if this message is a response message, this is set to the request msg*/
 	private Message requestMsg;
-	
+
 	/** Container for generic message properties. Note that all values
 	 * stored in the properties should be immutable because only a shallow
 	 * copy of the properties is made when replicating messages */
 	private Map<String, Object> properties;
-	
+
 	/** Application ID of the application that created the message */
 	private String	appID;
 	private String data;
-	
+
 	static {
 		reset();
 		DTNSim.registerForReset(Message.class.getCanonicalName());
 	}
-	
+
 	/**
 	 * Creates a new Message.
 	 * @param from Who the message is (originally) from
@@ -76,7 +76,7 @@ public class Message implements Comparable<Message> {
 		this.size = size;
 		this.path = new ArrayList<DTNHost>();
 		this.uniqueId = nextUniqueId;
-		
+
 		this.timeCreated = SimClock.getTime();
 		this.timeReceived = this.timeCreated;
 		this.initTtl = INFINITE_TTL;
@@ -84,19 +84,19 @@ public class Message implements Comparable<Message> {
 		this.requestMsg = null;
 		this.properties = null;
 		this.appID = null;
-		
+
 		Message.nextUniqueId++;
 		addNodeOnPath(from);
 	}
-	
+
 	public Message(DTNHost from, DTNHost to, String id, int size,String data) {
 		this(from,to,id,size);
 		this.setData(data);
-		
-		
-		
+
+
+
 	}
-	
+
 	/**
 	 * Returns the node this message is originally from
 	 * @return the node this message is originally from
@@ -120,7 +120,7 @@ public class Message implements Comparable<Message> {
 	public String getId() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Returns an ID that is unique per message instance 
 	 * (different for replicates too)
@@ -129,7 +129,7 @@ public class Message implements Comparable<Message> {
 	public int getUniqueId() {
 		return this.uniqueId;
 	}
-	
+
 	/**
 	 * Returns the size of the message (in bytes)
 	 * @return the size of the message
@@ -145,7 +145,7 @@ public class Message implements Comparable<Message> {
 	public void addNodeOnPath(DTNHost node) {
 		this.path.add(node);
 	}
-	
+
 	/**
 	 * Returns a list of nodes this message has passed so far
 	 * @return The list as vector
@@ -153,7 +153,7 @@ public class Message implements Comparable<Message> {
 	public List<DTNHost> getHops() {
 		return this.path;
 	}
-	
+
 	/**
 	 * Returns the amount of hops this message has passed
 	 * @return the amount of hops this message has passed
@@ -161,7 +161,7 @@ public class Message implements Comparable<Message> {
 	public int getHopCount() {
 		return this.path.size() -1;
 	}
-	
+
 	/** 
 	 * Returns the time to live (minutes) of the message or Integer.MAX_VALUE 
 	 * if the TTL is infinite. Returned value can be negative if the TTL has
@@ -177,8 +177,8 @@ public class Message implements Comparable<Message> {
 					(SimClock.getTime()-this.timeCreated)) /60.0 );
 		}
 	}
-	
-	
+
+
 	/**
 	 * Sets the initial TTL (time-to-live) for this message. The initial
 	 * TTL is the TTL when the original message was created. The current TTL
@@ -188,7 +188,7 @@ public class Message implements Comparable<Message> {
 	public void setTtl(int ttl) {
 		this.initTtl = ttl;
 	}
-	
+
 	/**
 	 * Sets the time when this message was received.
 	 * @param time The time to set
@@ -196,7 +196,7 @@ public class Message implements Comparable<Message> {
 	public void setReceiveTime(double time) {
 		this.timeReceived = time;
 	}
-	
+
 	/**
 	 * Returns the time when this message was received
 	 * @return The time
@@ -204,7 +204,7 @@ public class Message implements Comparable<Message> {
 	public double getReceiveTime() {
 		return this.timeReceived;
 	}
-	
+
 	/**
 	 * Returns the time when this message was created
 	 * @return the time when this message was created
@@ -212,7 +212,7 @@ public class Message implements Comparable<Message> {
 	public double getCreationTime() {
 		return this.timeCreated;
 	}
-	
+
 	/**
 	 * If this message is a response to a request, sets the request message
 	 * @param request The request message
@@ -220,7 +220,7 @@ public class Message implements Comparable<Message> {
 	public void setRequest(Message request) {
 		this.requestMsg = request;
 	}
-	
+
 	/**
 	 * Returns the message this message is response to or null if this is not
 	 * a response message
@@ -229,7 +229,7 @@ public class Message implements Comparable<Message> {
 	public Message getRequest() {
 		return this.requestMsg;
 	}
-	
+
 	/**
 	 * Returns true if this message is a response message
 	 * @return true if this message is a response message
@@ -237,7 +237,7 @@ public class Message implements Comparable<Message> {
 	public boolean isResponse() {
 		return this.requestMsg != null;
 	}
-	
+
 	/**
 	 * Sets the requested response message's size. If size == 0, no response
 	 * is requested (default)
@@ -246,7 +246,7 @@ public class Message implements Comparable<Message> {
 	public void setResponseSize(int size) {
 		this.responseSize = size;
 	}
-	
+
 	/**
 	 * Returns the size of the requested response message or 0 if no response
 	 * is requested.
@@ -255,7 +255,7 @@ public class Message implements Comparable<Message> {
 	public int getResponseSize() {
 		return responseSize;
 	}
-	
+
 	/**
 	 * Returns a string representation of the message
 	 * @return a string representation of the message
@@ -277,13 +277,13 @@ public class Message implements Comparable<Message> {
 		this.requestMsg  = m.requestMsg;
 		this.initTtl = m.initTtl;
 		this.appID = m.appID;
-		
+
 		this.label = m.label;
 		this.temp = m.temp;
 		this.state = m.state;
 		this.data = m.data;
-		
-		
+
+
 		if (m.properties != null) {
 			Set<String> keys = m.properties.keySet();
 			for (String key : keys) {
@@ -291,7 +291,7 @@ public class Message implements Comparable<Message> {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds a generic property for this message. The key can be any string but 
 	 * it should be such that no other class accidently uses the same value.
@@ -308,10 +308,10 @@ public class Message implements Comparable<Message> {
 			throw new SimError("Message " + this + " already contains value " + 
 					"for a key " + key);
 		}
-		
+
 		this.updateProperty(key, value);
 	}
-	
+
 	/**
 	 * Returns an object that was stored to this message using the given
 	 * key. If such object is not found, null is returned.
@@ -324,7 +324,7 @@ public class Message implements Comparable<Message> {
 		}
 		return this.properties.get(key);
 	}
-	
+
 	/**
 	 * Updates a value for an existing property. For storing the value first 
 	 * time, {@link #addProperty(String, Object)} should be used which
@@ -341,7 +341,7 @@ public class Message implements Comparable<Message> {
 
 		this.properties.put(key, value);
 	}
-	
+
 	/**
 	 * Returns a replicate of this message (identical except for the unique id)
 	 * @return A replicate of the message
@@ -351,7 +351,7 @@ public class Message implements Comparable<Message> {
 		m.copyFrom(this);
 		return m;
 	}
-	
+
 	/**
 	 * Compares two messages by their ID (alphabetically).
 	 * @see String#compareTo(String)
@@ -359,7 +359,7 @@ public class Message implements Comparable<Message> {
 	public int compareTo(Message m) {
 		return toString().compareTo(m.toString());
 	}
-	
+
 	/**
 	 * Resets all static fields to default values
 	 */
@@ -380,15 +380,15 @@ public class Message implements Comparable<Message> {
 	public void setAppID(String appID) {
 		this.appID = appID;
 	}
-	
-	
+
+
 	/**
 	 * for master and back up types
 	 * used in scar protocol
 	 * */
 	public boolean isMaster(){return label.equals("master");}
 	public void setAsBackUp(){label="backup";}
-	
+
 	/*
 	 * for simulated annealing implementation
 	 */
@@ -407,21 +407,21 @@ public class Message implements Comparable<Message> {
 	public void setTemp(double temp) {
 		this.temp = temp;
 	}
-	
+
 	public void incTemp(){
-		
-	if(state.equals("UP") && temp < 100)
-	{
-		
-		temp=temp + 100/(Integer)this.getProperty("FTCValue");
-		if(temp >= 100)
-			this.setState("MAX");
-	}
-		
+
+		if(state.equals("UP") && temp < 100)
+		{
+
+			temp=temp + 100/(Integer)this.getProperty("FTCValue");
+			if(temp >= 100)
+				this.setState("MAX");
+		}
+
 	}
 
 	public void decTemp() {
-		
+
 		if(state.equals("DOWN") && temp>0)
 		{
 			temp=temp - 50/(Integer)this.getProperty("FTCValue");
@@ -431,7 +431,7 @@ public class Message implements Comparable<Message> {
 				temp=0;
 			}
 		}
-		
+
 	}
 
 	public String getData() {
@@ -444,8 +444,8 @@ public class Message implements Comparable<Message> {
 
 	public void setID(String id) {
 		this.id=id;
-		
+
 	}
-	
-	
+
+
 }

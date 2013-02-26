@@ -1,0 +1,25 @@
+Message stats for scenario SCFadSourceG10K10B32kC0S31
+sim_time: 341042.0000
+created: 10
+started: 766
+relayed: 765
+aborted: 1
+dropped: 421
+removed: 44
+delivered: 10
+delivery_prob: 1.0000
+response_prob: 0.0000
+overhead_ratio: 75.5000
+latency_avg: 3038.5000
+latency_med: 3894.0000
+hopcount_avg: 3.5000
+hopcount_med: 3
+copies_avg: 6.6
+total_copies_avg: 75.2
+buffertime_avg: 1590.6301
+buffertime_med: 554.0000
+custodiantime_avg: 73964.3000
+rtt_avg: NaN
+rtt_med: NaN
+full_delivery_time: 5077.0000
+last_delivery_time: 5077.0000

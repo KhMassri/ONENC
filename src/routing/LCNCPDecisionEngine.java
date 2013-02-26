@@ -237,7 +237,7 @@ public class LCNCPDecisionEngine implements RoutingDecisionEngine
 		return true;
 	}
 
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 		
 		return (Integer)msg2.getProperty(MSG_COUNT_PROP) - (Integer)msg1.getProperty(MSG_COUNT_PROP);
 		

@@ -201,7 +201,7 @@ public class SnFDecisionEngine implements RoutingDecisionEngine
 		return false;
 	}
 
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 		
 		return 0;
 		

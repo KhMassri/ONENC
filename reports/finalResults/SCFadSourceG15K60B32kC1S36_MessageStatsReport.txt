@@ -1,0 +1,25 @@
+Message stats for scenario SCFadSourceG15K60B32kC1S36
+sim_time: 341042.0000
+created: 60
+started: 1667
+relayed: 1663
+aborted: 4
+dropped: 1324
+removed: 84
+delivered: 15
+delivery_prob: 0.2500
+response_prob: 0.0000
+overhead_ratio: 109.8667
+latency_avg: 3573.8667
+latency_med: 3215.0000
+hopcount_avg: 3.5333
+hopcount_med: 4
+copies_avg: 16.2
+total_copies_avg: 27.433333333333334
+buffertime_avg: 884.0412
+buffertime_med: 307.0000
+custodiantime_avg: 20745.5000
+rtt_avg: NaN
+rtt_med: NaN
+full_delivery_time: 341042.0000
+last_delivery_time: 5137.0000

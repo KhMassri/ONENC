@@ -15,8 +15,8 @@ import glob
 #last_delivery_time:
 
 
-G=['5']
-K=['5','10','15','20','30']
+G=['20']
+K=['20','30','40','50','60','70','80']
 C=['0','1']
 Seeds = list(range(40))
 
@@ -24,9 +24,8 @@ Seeds = list(range(40))
 
 #  5:  5 10  15  20 30
 # 10: 10 15  20  25 30 40 50
-# 15: 15 20  25  30 40 50 60
-# 20: 20 25  30  40 50 60 70 
-
+# 15: 15 20  30 40 50 60 70
+# 20: 20  30  40 50 60 70 80 
 
 for g in G:
     out = open('G'+g+'.txt','w')
@@ -40,7 +39,7 @@ for g in G:
             
             for seed in Seeds:
                 isDec = False
-                for line in open('./finalResults/SCFadSourceG'+g+'K'+k+'B32kC'+c+'S'+str(seed)+'_MessageStatsReport.txt').readlines():
+                for line in open('./finalResults77Node/SCFadSourceG'+g+'K'+k+'B32kC'+c+'S'+str(seed)+'_MessageStatsReport.txt').readlines():
                     record=line.split()
                     if record[0]=='delivered:':
                         delivered.append(int(record[1]))
@@ -56,7 +55,7 @@ for g in G:
                         latency.append(float(record[1]))
                     #elif record[0]=='last_delivery_time:' and not isDec:
                       #  latency.append(float(record[1]))
-            #print decoded
+            print decoded
             #print len(latency),sum(decoded)
             avgDel = sum(delivered)/(0.0+len(delivered))
             avgDec = sum(decoded)/(0.0+len(decoded))

@@ -132,12 +132,14 @@ public class SCFadRelay implements RoutingDecisionEngine
 
 		String[] mId = m.getId().split(":");
 		String mPodId = mId[0];
+		String lc = mId[1];
 
 		//destination case
 
 		if(otherHost.getRouter().decider instanceof SCFadDestination)
 		{
-			if(!(((SCFadDestination)otherHost.getRouter().decider).getEncodedPods().contains(mPodId)))
+			SCFadDestination other = ((SCFadDestination)otherHost.getRouter().decider);
+			if(!(other.getEncodedPods().contains(mPodId)))
 				return true;
 
 
@@ -180,7 +182,7 @@ public class SCFadRelay implements RoutingDecisionEngine
 	}
 
 	/*to be sorted ascending according to ft value*/
-	public int compareToSort(Message msg1, Message msg2){
+	public int compareToSort(Message msg1, Message msg2, Connection con1, Connection con2, DTNHost me){
 
 		if((Double)msg1.getProperty(ftStr) < (Double)msg2.getProperty(ftStr))
 			return -1;
